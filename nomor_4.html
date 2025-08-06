@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deret Bilangan Ganjil</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+        
+        input {
+            padding: 5px;
+        }
+        
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <label>Counter:</label>
+    <input type="number" id="counter" min="1" placeholder="Masukkan jumlah angka">
+    <button onclick="generate()">Generate</button>
+    <div id="hasil"></div>
+    
+    <script>
+        function generate() {
+            let n = parseInt(document.getElementById("counter").value);
+            let hasil = document.getElementById("hasil");
+            hasil.innerHTML = "";
+            
+            if (isNaN(n) || n <= 0) {
+                hasil.innerHTML = "Masukkan angka yang valid!";
+                return;
+            }
+            
+            let angka = 1;
+            let output = "";
+            
+            for (let i = 0; i < n; i++) {
+                let strAngka = angka.toString();
+                let habis3 = (angka % 3 === 0);
+                let ada3 = strAngka.includes("3");
+                
+                if (habis3 && ada3) {
+                    output += "SEVEN<br>";
+                } else if (habis3 || ada3) {
+                    output += "TRANS<br>";
+                } else {
+                    output += angka + "<br>";
+                }
+                
+                angka += 2;
+            }
+            
+            hasil.innerHTML = output;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deret Genap, Prima, Fibonacci</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+        
+        input {
+            padding: 5px;
+        }
+        
+        button {
+            padding: 5px 10px;
+        }
+        
+        .row { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <label>Counter:</label>
+        <input type="number" id="counter" min="1" placeholder="Masukkan jumlah">
+        <button onclick="tampilkanDeret()">Tampilkan Deret</button>
+    </div>
+    
+    <div class="row">
+        <label>Deret Genap:</label>
+        <input type="text" id="genap">
+    </div>
+    
+    <div class="row">
+        <label>Deret Prima:</label>
+        <input type="text" id="prima">
+    </div>
+    
+    <div class="row">
+        <label>Fibonacci:</label>
+        <input type="text" id="fibo">
+    </div>
+    
+    <script>
+        function deretGenap(n) {
+            let hasil = [];
+            for (let i = 1; i <= n; i++) {
+                hasil.push(2 * i);
+            }
+            
+            return hasil;
+        }
+        
+        function deretPrima(n) {
+            let hasil = [];
+            let angka = 2;
+            while (hasil.length < n) {
+                let prima = true;
+                for (let i = 2; i <= Math.sqrt(angka); i++) {
+                    if (angka % i === 0) {
+                        prima = false;
+                        break;
+                    }
+                }
+                if (prima) hasil.push(angka);
+                angka++;
+            }
+            
+            return hasil;
+        }
+        
+        function deretFibonacci(n) {
+            let hasil = [];
+            let a = 1, b = 1;
+            for (let i = 0; i < n; i++) {
+                hasil.push(a);
+                [a, b] = [b, a + b];
+            }
+            
+            return hasil;
+        }
+        
+        function tampilkanDeret() {
+            let n = parseInt(document.getElementById("counter").value);
+            if (isNaN(n) || n <= 0) {
+                alert("Masukkan angka yang valid!");
+                return;
+            }
+            
+            document.getElementById("genap").value = deretGenap(n).join(", ");
+            document.getElementById("prima").value = deretPrima(n).join(", ");
+            document.getElementById("fibo").value = deretFibonacci(n).join(", ");
+        }
+    </script>
+</body>
+</html>

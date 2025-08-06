@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt & Decrypt</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+        
+        input {
+            padding: 5px;
+        }
+        
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encrypt -->
+    <div>
+        <label>String</label>
+        <input type="text" id="inputEncrypt">
+        <button onclick="encrypt()">encrypt</button>
+    </div>
+    <div id="hasilEncrypt"></div>
+    <br>
+    <!-- Decrypt -->
+    <div>
+        <label>String</label>
+        <input type="text" id="inputDecrypt">
+        <button onclick="decrypt()">decrypt</button>
+    </div>
+    <div id="hasilDecrypt"></div>
+    
+    <script>
+        const vocal = ['a','i','u','e','o'];
+        const primes = [2, 3, 5, 7, 11, 13];
+        
+        function encrypt() {
+            let text = document.getElementById("inputEncrypt").value.toLowerCase();
+            let primeIndex = 0;
+            let hasil = "";
+            
+            for (let char of text) {
+                if (vocal.includes(char)) {
+                    let idx = vocal.indexOf(char);
+                    let newIdx = (idx + primes[primeIndex % primes.length]) % 5;
+                    hasil += vocal[newIdx];
+                    primeIndex++;
+                } else {
+                    hasil += char;
+                }
+            }
+            document.getElementById("hasilEncrypt").innerHTML = "hasil : " + hasil;
+        }
+        
+        function decrypt() {
+            let text = document.getElementById("inputDecrypt").value.toLowerCase();
+            let primeIndex = 0;
+            let hasil = "";
+            
+            for (let char of text) {
+                if (vocal.includes(char)) {
+                    let idx = vocal.indexOf(char);
+                    let newIdx = (idx - primes[primeIndex % primes.length] + 5 * 10) % 5;
+                    hasil += vocal[newIdx];
+                    primeIndex++;
+                } else {
+                    hasil += char;
+                }
+            }
+            document.getElementById("hasilDecrypt").innerHTML = "hasil : " + hasil;
+        }
+    </script>
+</body>
+</html>
